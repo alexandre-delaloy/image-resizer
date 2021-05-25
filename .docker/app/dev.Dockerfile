@@ -21,4 +21,4 @@ COPY . .
 EXPOSE 8080
 
 # Start service
-CMD ["npm", "run", "serve", "--", "--port", "8081"]
+CMD ["npm", "run", "serve", "--", "--port", "8080"]

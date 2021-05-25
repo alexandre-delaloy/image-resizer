@@ -1,11 +1,56 @@
-version: "3"
+version: "3.8"
 
 services:
-  web:
-    build: .
+  app:
+    container_name: image-resizer_app
+    build:
+      context: .
+      dockerfile: .docker/app/dev.Dockerfile
+    volumes:
+      - ./app/:/app/
+      - /app/node_modules
     ports:
-      - "5000:5000"
-  redis:
-    image: "redis:alpine"
+      - 8080:8080
+    networks:
+      - image-resizer
+  api:
+    container_name: image-resizer_api
+    build:
+      context: api/
+      dockerfile: ../.docker/api/dev.Dockerfile
+    ports:
+      - 3010:3010
+    volumes:
+      - ./api:/go/src/github.com/blyndusk/image-resizer/api
+    networks:
+      - image-resizer
 
-    
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=db
+      - DATABASE_HOST=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - image-resizer
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 3011:8080
+    depends_on:
+      - postgres
+    networks:
+      - image-resizer
+
+volumes:
+  postgres:
+
+networks:
+  image-resizer:
