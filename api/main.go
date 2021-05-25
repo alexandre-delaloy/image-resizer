@@ -25,6 +25,6 @@ func setupServer() *gin.Engine {
 			"message": "pong",
 		})
 	})
-	r.Run(":3001")
+	r.Run(":3010")
 	return r
 }
