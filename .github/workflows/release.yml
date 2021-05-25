@@ -22,8 +22,8 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: exit 1
 
-  DOCKER:
-    name: DOCKER
+  DOCKER-APP:
+    name: DOCKER APP
     needs: [SETUP-ENV]
     runs-on: ubuntu-latest
     steps:
@@ -34,14 +34,35 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
-          password: ${{ secrets.GPAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          workdir: .docker/app
+          dockerfile: .docker/app/prod.Dockerfile
           registry: docker.pkg.github.com
-          repository: blyndusk/repo-template/pyapp
-          tags: "${{ github.event.inputs.image_version }}"
+          repository: blyndusk/image-resizer/image-resizer_app
+          tags: "latest"
+
+  DOCKER-API:
+    name: DOCKER API
+    needs: [SETUP-ENV]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1 - CHECKOUT
+        uses: actions/checkout@v2
+
+      - name: 2 - BUILD + PUSH DOCKER IMG TO GITHUB PACKAGE REGISTRY
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          workdir: .docker/api
+          dockerfile: .docker/api/prod.Dockerfile
+          registry: docker.pkg.github.com
+          repository: blyndusk/image-resizer/image-resizer_api
+          tags: "latest"
 
   RELEASE:
     name: RELEASE
-    needs: [DOCKER]
+    needs: [DOCKER-APP, DOCKER-API]
     runs-on: ubuntu-latest
     steps:
       - name: 1 - CHECKOUT
