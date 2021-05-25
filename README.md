@@ -1,25 +1,30 @@
-# repo-template
+# image-resizer
 
-[![RELEASE](https://img.shields.io/github/v/release/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/releases)
-[![RELEASE DATE](https://img.shields.io/github/release-date/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/commits/main)
-[![ISSUES](https://img.shields.io/github/issues/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/issues)
-[![PULL REQUESTS](https://img.shields.io/github/issues-pr/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/pulls) 
-[![LAST COMMIT](https://img.shields.io/github/last-commit/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/commits/main)
-[![LICENSE](https://img.shields.io/github/license/blyndusk/repo-template)](https://github.com/blyndusk/repo-template/blob/main/LICENSE) 
-[![REPO SIZE](https://img.shields.io/github/repo-size/blyndusk/repo-template)](https://github.com/blyndusk/repo-template) 
+[![RELEASE](https://img.shields.io/github/v/release/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/releases)
+[![RELEASE DATE](https://img.shields.io/github/release-date/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/commits/main)
+[![ISSUES](https://img.shields.io/github/issues/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/issues)
+[![PULL REQUESTS](https://img.shields.io/github/issues-pr/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/pulls)
+[![LAST COMMIT](https://img.shields.io/github/last-commit/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/commits/main)
+[![LICENSE](https://img.shields.io/github/license/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/blob/main/LICENSE)
+[![REPO SIZE](https://img.shields.io/github/repo-size/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer)
 
-[![DOCKER](https://github.com/blyndusk/repo-template/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/repo-template/actions/workflows/docker.yml) 
-[![PYTHON](https://github.com/blyndusk/repo-template/actions/workflows/python.yml/badge.svg)](https://github.com/blyndusk/repo-template/actions/workflows/python.yml)
-[![RELEASE](https://github.com/blyndusk/repo-template/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/repo-template/actions/workflows/release.yml)
+[![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
+[![PYTHON](https://github.com/blyndusk/image-resizer/actions/workflows/python.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/python.yml)
+[![RELEASE](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml)
 
-- [repo-template](#repo-template)
-  - [I - Goal](#i---goal)
-  - [II - Conventions, templates and guidelines](#ii---conventions-templates-and-guidelines)
+- [image-resizer](#image-resizer)
+  - [I - Intro](#i---intro)
+    - [1 - Goal](#1---goal)
+    - [2 - Stack](#2---stack)
+  - [II - Schemas](#ii---schemas)
+    - [1 - Local infrastructure](#1---local-infrastructure)
+    - [2 - Cloud infrastructure](#2---cloud-infrastructure)
+    - [3 - Database schema](#3---database-schema)
+  - [III - Conventions, templates and guidelines](#iii---conventions-templates-and-guidelines)
     - [A - Commit conventions](#a---commit-conventions)
     - [B - Issue template](#b---issue-template)
     - [C - Branch naming convention](#c---branch-naming-convention)
     - [D - Pull request template](#d---pull-request-template)
-  - [III - Use](#iii---use)
   - [IV - Project use](#iv---project-use)
     - [Help](#help)
     - [Start](#start)
@@ -28,16 +33,37 @@
     - [Display logs](#display-logs)
   - [V - License](#v---license)
 
-## I - Goal
+## I - Intro
 
-The purpose of this repository is to provide a solid, complete and adaptable base of a quasi-virgin repository, in order to start a new project with a maximum time saving.
+### 1 - Goal
 
-This repository provides:
-  - commit/branch/issues/pull requests conventions, templates and guidelines
-  - GitHub Actions for CI, CD and release
-  
+Image Resizer is a school project made for @ecolehetic, with the aim to automate the resize of uploaded avatar from a user on a forum.
 
-## II - Conventions, templates and guidelines
+### 2 - Stack
+
+| Service    | Type                       |
+| ---------- | -------------------------- |
+| Vuejs      | Front-end framework        |
+| Golang     | Back-end language          |
+| PostgresQL | Object-relational database |
+| RabbitMQ   | Message broker             |
+
+## II - Schemas
+
+### 1 - Local infrastructure
+
+![local-infrastructure](./docs/infrastructure-local-solution.png)
+
+### 2 - Cloud infrastructure
+
+![cloud-infrastructure](./docs/infrastructure-cloud-solution.png)
+
+
+### 3 - Database schema
+
+![database-schema](./docs/database-schema.png)
+
+## III - Conventions, templates and guidelines
 
 ### A - Commit conventions
 
@@ -62,12 +88,6 @@ See [branch_naming_convention.md](.github/branch_naming_convention.md) for more 
 ### D - Pull request template
 
 See [pull_request_template.md](.github/pull_request_template.md) for more informations.
-
-## III - Use
-
-Go to `New Repository`, then choose this template
-
-![create-as-tpl](./docs/create-as-tpl.jpg)
 
 
 ## IV - Project use
