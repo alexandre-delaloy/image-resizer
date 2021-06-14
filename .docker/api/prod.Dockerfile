@@ -2,7 +2,6 @@ FROM golang:1.15-alpine as builder
 
 LABEL org.opencontainers.image.source = "https://github.com/blyndusk/image-resizer"
 
-
 # ----- SETUP -----
 
 # Enable Go modules

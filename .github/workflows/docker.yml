@@ -36,6 +36,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
-          repository: blyndusk/image-resizer_app
-          dockerfile: .docker/app/prod.Dockerfile
+          repository: blyndusk/image-resizer_api
+          dockerfile: .docker/api/prod.Dockerfile
           tags: "latest"
