@@ -13,11 +13,12 @@ jobs:
       - name: 1 - CHECKOUT
         uses: actions/checkout@v2
 
-      - name: 2 - BUILD + PUSH DOCKER IMG TO GITHUB PACKAGE REGISTRY
+      - name: 2 - BUILD + PUSH
         uses: docker/build-push-action@v1
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GPAT }}
-          registry: docker.pkg.github.com
-          repository: blyndusk/repo-template/pyapp
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          repository: blyndusk/image-resizer
+          dockerfile: .docker/api/prod.Dockerfile
           tags: "latest"
