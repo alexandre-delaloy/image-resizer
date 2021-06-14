@@ -1,5 +1,8 @@
 FROM node:lts-alpine as build
 
+LABEL org.opencontainers.image.source = "https://github.com/blyndusk/image-resizer"
+
+
 # ----- SETUP -----
 
 # Set the current working with go absolute path
