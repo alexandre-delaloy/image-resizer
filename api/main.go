@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/blyndusk/cofy/api/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,6 +12,7 @@ func main() {
 }
 
 func setupServer() *gin.Engine {
+	database.Connect()
 
 	r := gin.Default()
 
@@ -28,3 +30,4 @@ func setupServer() *gin.Engine {
 	r.Run(":3010")
 	return r
 }
+
