@@ -16,7 +16,7 @@ RUN npm install
 # ----- COPY + RUN -----
 
 # Copy the source from the current directory to the container
-COPY . .
+COPY app/ .
 
 # Build app
 RUN npm run build

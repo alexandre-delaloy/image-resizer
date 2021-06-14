@@ -16,9 +16,9 @@ RUN npm install
 # ----- COPY + RUN -----
 
 # Copy the source from the current directory to the container
-COPY . .
+COPY app/ .
 
-EXPOSE 8080
+EXPOSE 8010
 
 # Start service
-CMD ["npm", "run", "serve", "--", "--port", "8080"]
+CMD ["npm", "run", "serve", "--", "--port", "8010"]

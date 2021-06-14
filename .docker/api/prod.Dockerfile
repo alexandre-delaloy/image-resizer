@@ -1,28 +1,40 @@
-FROM golang:alpine as build
+FROM golang:1.15-alpine as builder
 
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=amd64
+# ----- SETUP -----
 
-WORKDIR /build
+# Enable Go modules
+ENV GO111MODULE=on
 
+# Set the current working with go absolute path
+WORKDIR /go/src/github.com/blyndusk/image-resizer/api
+
+# ----- INSTALL -----
+
+# Copy go.mod + go.sum for install before full copy
 COPY api/go.mod .
 
-# COPY go.sum .
+COPY api/go.sum .
 
-RUN go mod download
+# Download all dependencies
+RUN go mod download -x
 
+# ----- COPY + RUN -----
+
+# Copy the source from the current directory to the container
 COPY api/ .
 
-RUN go build -o main .
+# Build app into specific folder
+RUN go build -o ./tmp/main ./
 
-WORKDIR /dist
+# ----- ALPINE -----
 
-RUN cp /build/main .
+FROM alpine
 
-FROM scratch
+# Copy binary
+COPY --from=builder /go/src/github.com/blyndusk/image-resizer/api/ /image-resizer/api/
 
-COPY --from=build /dist/main /
+# Set current directory
+WORKDIR /image-resizer/api/
 
-ENTRYPOINT ["/main"]
+# Use executable
+ENTRYPOINT [ "/image-resizer/api/tmp/main" ]
