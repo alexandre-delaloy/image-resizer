@@ -1,7 +1,7 @@
 # Commit convention
 
 ```
-tag(scope): #issue_id message
+tag(scope): #issue_id - message
 ```
 
 ## Tag
@@ -33,7 +33,7 @@ Ex: `change trigger method of deploy action`
 ## Examples
 
 ```
-add(template): pull request template
-fix(cd): change trigger method of deploy action
-doc(install): add project install method
+add(template): #6 - pull request template
+fix(cd): #15 - change trigger method of deploy action
+doc(install): #1 - add project install method
 ```

@@ -70,7 +70,7 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 ### A - Commit conventions
 
 ```
-tag(scope): #issue_id message
+tag(scope): #issue_id - message
 ```
 
 See [commit_conventions.md](.github/commit_conventions.md) for more informations.
