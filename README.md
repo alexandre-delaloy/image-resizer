@@ -8,9 +8,11 @@
 [![LICENSE](https://img.shields.io/github/license/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/blob/main/LICENSE)
 [![REPO SIZE](https://img.shields.io/github/repo-size/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer)
 
-[![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
-[![PYTHON](https://github.com/blyndusk/image-resizer/actions/workflows/python.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/python.yml)
 [![RELEASE](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml)
+[![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
+
+[![VUE](https://github.com/blyndusk/image-resizer/actions/workflows/vue.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/vue.yml)
+[![GO](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml)
 
 - [image-resizer](#image-resizer)
   - [I - Intro](#i---intro)
@@ -68,7 +70,7 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 ### A - Commit conventions
 
 ```
-tag(scope): #issue_id message
+tag(scope): #issue_id - message
 ```
 
 See [commit_conventions.md](.github/commit_conventions.md) for more informations.

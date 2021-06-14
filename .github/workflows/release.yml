@@ -23,42 +23,40 @@ jobs:
         run: exit 1
 
   DOCKER-APP:
+    needs: ["SETUP-ENV"]
     name: DOCKER APP
-    needs: [SETUP-ENV]
     runs-on: ubuntu-latest
     steps:
       - name: 1 - CHECKOUT
         uses: actions/checkout@v2
 
-      - name: 2 - BUILD + PUSH DOCKER IMG TO GITHUB PACKAGE REGISTRY
+      - name: 2 - BUILD + PUSH DOCKER
         uses: docker/build-push-action@v1
         with:
-          username: ${{ github.actor }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          workdir: .docker/app
+          registry: ghcr.io
+          repository: blyndusk/image-resizer_app
           dockerfile: .docker/app/prod.Dockerfile
-          registry: docker.pkg.github.com
-          repository: blyndusk/image-resizer/image-resizer_app
-          tags: "latest"
+          tags: "${{ github.event.inputs.image_version }}"
 
   DOCKER-API:
+    needs: ["SETUP-ENV"]
     name: DOCKER API
-    needs: [SETUP-ENV]
     runs-on: ubuntu-latest
     steps:
       - name: 1 - CHECKOUT
         uses: actions/checkout@v2
 
-      - name: 2 - BUILD + PUSH DOCKER IMG TO GITHUB PACKAGE REGISTRY
+      - name: 2 - BUILD + PUSH DOCKER
         uses: docker/build-push-action@v1
         with:
-          username: ${{ github.actor }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          workdir: .docker/api
-          dockerfile: .docker/api/prod.Dockerfile
-          registry: docker.pkg.github.com
-          repository: blyndusk/image-resizer/image-resizer_api
-          tags: "latest"
+          registry: ghcr.io
+          repository: blyndusk/image-resizer_app
+          dockerfile: .docker/app/prod.Dockerfile
+          tags: "${{ github.event.inputs.image_version }}"
 
   RELEASE:
     name: RELEASE

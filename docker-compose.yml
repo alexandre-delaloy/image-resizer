@@ -10,14 +10,14 @@ services:
       - ./app/:/app/
       - /app/node_modules
     ports:
-      - 8080:8080
+      - 8010:8010
     networks:
       - image-resizer
   api:
     container_name: image-resizer_api
     build:
-      context: api/
-      dockerfile: ../.docker/api/dev.Dockerfile
+      context: .
+      dockerfile: .docker/api/dev.Dockerfile
     ports:
       - 3010:3010
     volumes:

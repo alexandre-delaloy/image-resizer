@@ -1,5 +1,8 @@
 FROM node:lts-alpine as build
 
+LABEL org.opencontainers.image.source = "https://github.com/blyndusk/image-resizer"
+
+
 # ----- SETUP -----
 
 # Set the current working with go absolute path
@@ -16,7 +19,7 @@ RUN npm install
 # ----- COPY + RUN -----
 
 # Copy the source from the current directory to the container
-COPY . .
+COPY app/ .
 
 # Build app
 RUN npm run build
