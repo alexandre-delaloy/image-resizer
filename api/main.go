@@ -3,7 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/blyndusk/cofy/api/database"
+	"github.com/blyndusk/image-resizer/api/database"
+	"github.com/blyndusk/image-resizer/api/router"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +14,7 @@ func main() {
 
 func setupServer() *gin.Engine {
 	database.Connect()
+	database.Migrate()
 
 	r := gin.Default()
 
@@ -27,6 +29,8 @@ func setupServer() *gin.Engine {
 			"message": "pong",
 		})
 	})
+	router.Setup(r)
+
 	r.Run(":3010")
 	return r
 }
