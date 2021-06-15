@@ -14,6 +14,7 @@ func main() {
 
 func setupServer() *gin.Engine {
 	database.Connect()
+	database.Migrate()
 
 	r := gin.Default()
 
