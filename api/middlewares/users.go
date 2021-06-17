@@ -69,6 +69,6 @@ func DeleteUser(c *gin.Context, user *models.User) {
 
 func hydrateUser(input *models.UserInput) models.User {
 	return models.User{
-		Name:      input.Name,
+		Name: input.Name,
 	}
 }
