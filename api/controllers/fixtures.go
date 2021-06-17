@@ -9,13 +9,12 @@ import (
 )
 
 func LoadData(c *gin.Context) {
-	users := models.Users{
-		{
-			Name:      "John Doe",
-		},
-	}
 
-	database.Db.Create(&users)
+	user := models.User{
+		Name:   "John Doe",
+		Avatar: models.Avatar{FilePath: "/path/to/avatar"},
+	}
+	database.Db.Create(&user)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Fixtures loaded",
 	})
