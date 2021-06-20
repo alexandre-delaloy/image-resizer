@@ -28,14 +28,14 @@
     height: 40px;
     position: absolute;
     top: 5px;
-    right: 0px;
+    right: 0;
     z-index: 20;
     cursor: pointer;
   }
 
   .infos {
     font-size: 1.5em;
-    margin-right: 75px;
+    margin-right: 50px;
     line-height: 2;
 
     .username {
