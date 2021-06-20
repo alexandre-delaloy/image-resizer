@@ -3,7 +3,10 @@
 body {
   font-family: 'Open Sans Condensed', sans-serif;
   padding: 20px 60px;
-  background-color: cornflowerblue;
+  background-color: #E3ECFB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
