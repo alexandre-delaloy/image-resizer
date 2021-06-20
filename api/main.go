@@ -5,6 +5,7 @@ import (
 
 	"github.com/blyndusk/image-resizer/api/database"
 	"github.com/blyndusk/image-resizer/api/router"
+	"github.com/blyndusk/image-resizer/api/queue"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,6 +28,13 @@ func setupServer() *gin.Engine {
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",
+		})
+	})
+
+	r.GET("/emit", func(c * gin.Context) {
+		queue.emit
+		c.JSON(http.StatusOK, gin.H {
+			"message" : "le emit wlh"
 		})
 	})
 	router.Setup(r)
