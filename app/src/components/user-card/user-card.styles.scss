@@ -12,8 +12,6 @@
     width: 175px;
     height: 175px;
     position: relative;
-    /*background-image: url('../../assets/photo.jpg');
-    background-size: cover;*/
 
     .picture {
       width: 175px;
@@ -31,6 +29,10 @@
     right: 0;
     z-index: 20;
     cursor: pointer;
+
+    .edit-icon:hover {
+      fill: #ffc864;
+    }
   }
 
   .infos {
