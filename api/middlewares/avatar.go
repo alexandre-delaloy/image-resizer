@@ -10,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func CreateUser(c *gin.Context, input *models.UserInput) {
+func CreateAvatar(c *gin.Context, input *models.AvatarInput) {
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.ErrorToJson(http.StatusBadRequest, err.Error())
@@ -18,8 +18,8 @@ func CreateUser(c *gin.Context, input *models.UserInput) {
 		return
 	}
 
-	user := hydrateUser(input)
-	if err := database.Db.Create(&user).Error; err != nil {
+	avatar := hydrateAvatar(input)
+	if err := database.Db.Create(&avatar).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -27,8 +27,8 @@ func CreateUser(c *gin.Context, input *models.UserInput) {
 	}
 }
 
-func GetAllUsers(c *gin.Context, users *models.Users) {
-	if err := database.Db.Preload("Avatar").Find(&users).Error; err != nil {
+func GetAllAvatars(c *gin.Context, avatars *models.Avatars) {
+	if err := database.Db.Preload("Avatar").Find(&avatars).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -36,8 +36,8 @@ func GetAllUsers(c *gin.Context, users *models.Users) {
 	}
 }
 
-func GetUserById(c *gin.Context, user *models.User) {
-	if err := database.Db.Preload("Avatar").Where("id = ?", c.Params.ByName("id")).First(&user).Error; err != nil {
+func GetAvatarById(c *gin.Context, avatar *models.Avatar) {
+	if err := database.Db.Preload("Avatar").Where("id = ?", c.Params.ByName("id")).First(&avatar).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -45,8 +45,8 @@ func GetUserById(c *gin.Context, user *models.User) {
 	}
 }
 
-func UpdateUser(c *gin.Context, user *models.User, input *models.UserInput) {
-	GetUserById(c, user)
+func UpdateAvatar(c *gin.Context, avatar *models.Avatar, input *models.AvatarInput) {
+	GetAvatarById(c, avatar)
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.ErrorToJson(http.StatusBadRequest, err.Error())
@@ -54,12 +54,12 @@ func UpdateUser(c *gin.Context, user *models.User, input *models.UserInput) {
 		return
 	}
 
-	updatedUser := hydrateUser(input)
-	database.Db.Model(&user).Updates(updatedUser)
+	updatedAvatar := hydrateAvatar(input)
+	database.Db.Model(&avatar).Updates(updatedAvatar)
 }
 
-func DeleteUser(c *gin.Context, user *models.User) {
-	if err := database.Db.First(&user, c.Params.ByName("id")).Delete(&user).Error; err != nil {
+func DeleteAvatar(c *gin.Context, avatar *models.Avatar) {
+	if err := database.Db.First(&avatar, c.Params.ByName("id")).Delete(&avatar).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -67,8 +67,8 @@ func DeleteUser(c *gin.Context, user *models.User) {
 	}
 }
 
-func hydrateUser(input *models.UserInput) models.User {
-	return models.User{
-		Name: input.Name,
+func hydrateAvatar(input *models.AvatarInput) models.Avatar {
+	return models.Avatar{
+		FilePath: input.FilePath,
 	}
 }
