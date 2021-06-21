@@ -45,7 +45,7 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 
 | Service    | Type                       |
 | ---------- | -------------------------- |
-| Vuejs      | Front-end framework        |
+| Reactjs    | Front-end framework        |
 | Golang     | Back-end language          |
 | PostgresQL | Object-relational database |
 | RabbitMQ   | Message broker             |
@@ -59,7 +59,6 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 ### 2 - Cloud infrastructure
 
 ![cloud-infrastructure](./docs/infrastructure-cloud-solution.png)
-
 
 ### 3 - Database schema
 
@@ -90,7 +89,6 @@ See [branch_naming_convention.md](.github/branch_naming_convention.md) for more 
 ### D - Pull request template
 
 See [pull_request_template.md](.github/pull_request_template.md) for more informations.
-
 
 ## IV - Project use
 

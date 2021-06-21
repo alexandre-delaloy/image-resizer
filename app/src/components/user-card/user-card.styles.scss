@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 575px;
+  height: 270px;
+  background-color: #FCFCFC;
+  border-radius: 20px;
+  margin-top: 25%;
+
+  .profile-pic {
+    width: 175px;
+    height: 175px;
+    position: relative;
+
+    .picture {
+      width: 175px;
+      height: 175px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .edit-profile-img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    z-index: 20;
+    cursor: pointer;
+
+    .edit-icon:hover {
+      fill: #ffc864;
+    }
+  }
+
+  .infos {
+    font-size: 1.5em;
+    margin-right: 50px;
+    line-height: 2;
+
+    .username {
+      font-weight: bold;
+    }
+  }
+
+}
+

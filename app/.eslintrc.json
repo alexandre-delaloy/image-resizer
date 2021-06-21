@@ -1,0 +1,53 @@
+{
+    "settings": {
+        "react": {
+            "fragment": "Fragment" ,
+            "version": "detect"
+        } ,
+        "env": {
+            "browser": true,
+            "commonjs": true,
+            "es6": true
+        } ,
+        "extends": [
+            "eslint:recommended" ,
+            "plugin:react/recommended"
+        ] ,
+        "parser": "babel-eslint",
+        "parserOptions": {
+            "ecmaFeatures": {
+                "jsx": true,
+                "module": true
+            } ,
+            "ecmaVersion": 12 ,
+            "sourceType": "module",
+            "allowImportExportEverywhere": true
+        } ,
+        "plugins": [
+            "react",
+            "eslint-plugin-import"
+        ] ,
+        "rules": {
+            "indent": [
+                "error" ,
+                2
+            ] ,
+            "linebreak-style": [
+                "error" ,
+                "unix"
+            ] ,
+            "quotes": [
+                "error" ,
+                "single"
+            ] ,
+            "semi": [
+                "error",
+                "always"
+            ],
+            "import/extensions": [
+                ".js",
+                ".jsx"
+            ]
+        }
+    }
+}
