@@ -21,4 +21,4 @@ COPY app/ .
 EXPOSE 8010
 
 # Start service
-CMD ["npm", "run", "serve", "--", "--port", "8010"]
+CMD ["npm", "run", "serve"]
