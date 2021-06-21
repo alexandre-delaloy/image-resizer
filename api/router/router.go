@@ -23,7 +23,6 @@ func usersRoute(r *gin.Engine) {
 	r.DELETE("/users/:id", controllers.DeleteUser)
 }
 
-
 func avatarsRoute(r *gin.Engine) {
 	r.POST("/avatars", controllers.CreateUser)
 
