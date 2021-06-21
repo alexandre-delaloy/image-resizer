@@ -28,7 +28,7 @@ func CreateUser(c *gin.Context, input *models.UserInput) {
 }
 
 func GetAllUsers(c *gin.Context, users *models.Users) {
-	if err := database.Db.Find(&users).Error; err != nil {
+	if err := database.Db.Preload("Avatar").Find(&users).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -37,7 +37,7 @@ func GetAllUsers(c *gin.Context, users *models.Users) {
 }
 
 func GetUserById(c *gin.Context, user *models.User) {
-	if err := database.Db.Where("id = ?", c.Params.ByName("id")).First(&user).Error; err != nil {
+	if err := database.Db.Preload("Avatar").Where("id = ?", c.Params.ByName("id")).First(&user).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)

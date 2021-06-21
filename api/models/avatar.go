@@ -6,8 +6,8 @@ import (
 
 type Avatar struct {
 	gorm.Model
-	FilePath string
-	UserID   uint
+	FilePath string `json:"file_path"`
+	UserID   uint   `json:"user_id"`
 }
 
 type Avatars []Avatar

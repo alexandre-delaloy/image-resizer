@@ -15,8 +15,6 @@ func LoadData(c *gin.Context) {
 		Avatar: models.Avatar{FilePath: "/path/to/avatar"},
 	}
 	database.Db.Create(&user)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Fixtures loaded",
-	})
+	c.JSON(http.StatusOK, user)
 
 }
