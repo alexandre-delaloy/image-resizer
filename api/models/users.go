@@ -1,16 +1,15 @@
 package models
 
-import "time"
+import "gorm.io/gorm"
 
 type User struct {
-	Id        uint      `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	gorm.Model
+	Name   string `json:"name"`
+	Avatar Avatar
 }
 
 type Users []User
 
 type UserInput struct {
-	Name      string `json:"name"`
+	Name string `json:"name"`
 }
