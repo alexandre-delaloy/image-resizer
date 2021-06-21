@@ -11,7 +11,7 @@
 [![RELEASE](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml)
 [![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
 
-[![VUE](https://github.com/blyndusk/image-resizer/actions/workflows/vue.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/vue.yml)
+[![REACT](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml)
 [![GO](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml)
 
 - [image-resizer](#image-resizer)
@@ -29,10 +29,12 @@
     - [D - Pull request template](#d---pull-request-template)
   - [IV - Project use](#iv---project-use)
     - [Help](#help)
+    - [Init](#init)
     - [Start](#start)
     - [Stop](#stop)
     - [Restart](#restart)
     - [Display logs](#display-logs)
+    - [Lint](#lint)
   - [V - License](#v---license)
 
 ## I - Intro
@@ -69,7 +71,7 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 ### A - Commit conventions
 
 ```
-tag(scope): #issue_id - message
+tag: #issue_id - message
 ```
 
 See [commit_conventions.md](.github/commit_conventions.md) for more informations.
@@ -98,6 +100,14 @@ See [pull_request_template.md](.github/pull_request_template.md) for more inform
 $ make help
 ```
 
+### Init
+
+```bash
+$ make init
+```
+
+This command will copy env file. Please update `api/.env` with actual env vars
+
 ### Start
 
 ```bash
@@ -120,6 +130,13 @@ $ make restart
 
 ```bash
 $ make logs
+```
+
+### Lint
+
+```bash
+$ make lint-app
+$ make lint-api
 ```
 
 ## V - License

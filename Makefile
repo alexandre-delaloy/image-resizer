@@ -22,9 +22,16 @@ stop: ## Down the docker-compose
 logs: ## Display logs of your containers 
 	docker-compose logs --follow
 
-lint:
+lint-app:
+	cd app
+	npm run lint
+	cd -
+	
+lint-api:
+	cd api
 	gofmt -s -w -l .
-
+	cd -
+	
 init: ## Initialize the project with all required setup
 	make setup-env
 	make start
