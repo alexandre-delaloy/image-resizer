@@ -1,30 +1,6 @@
 version: "3.8"
 
 services:
-  app:
-    container_name: image-resizer_app
-    build:
-      context: .
-      dockerfile: .docker/app/dev.Dockerfile
-    volumes:
-      - ./app/:/app/
-      - /app/node_modules
-    ports:
-      - 8010:8010
-    networks:
-      - image-resizer
-  api:
-    container_name: image-resizer_api
-    build:
-      context: .
-      dockerfile: .docker/api/dev.Dockerfile
-    ports:
-      - 3010:3010
-    volumes:
-      - ./api:/go/src/github.com/blyndusk/image-resizer/api
-    networks:
-      - image-resizer
-
   postgres:
     image: postgres:latest
     environment:
@@ -50,11 +26,60 @@ services:
       - image-resizer
 
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:3-management
     container_name: rabbitmq
+    hostname: rabbitmq-server
     ports:
       - 5672:5672
+      - 15672:15672
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - image-resizer
 
+  app:
+    container_name: image-resizer_app
+    build:
+      context: .
+      dockerfile: .docker/app/dev.Dockerfile
+    volumes:
+      - ./app/:/app/
+      - /app/node_modules
+    ports:
+      - 8010:8010
+    networks:
+      - image-resizer
+
+  api:
+    container_name: image-resizer_api
+    build:
+      context: .
+      dockerfile: .docker/api/dev.Dockerfile
+    ports:
+      - 3010:3010
+    volumes:
+      - ./api:/go/src/github.com/blyndusk/image-resizer/api
+    networks:
+      - image-resizer
+
+  # worker:
+  #   container_name: image-resizer_worker
+  #   build:
+  #     context: .
+  #     dockerfile: .docker/worker/dev.Dockerfile
+  #   volumes:
+  #     - ./worker:/go/src/github.com/blyndusk/image-resizer/worker
+  #   networks:
+  #     - image-resizer
+  #   depends_on: 
+  #     - rabbitmq
+  #   restart: on-failure
+    
 volumes:
   postgres:
 

@@ -4,3 +4,5 @@ api/.env
 .idea/*
 
 **/*.png
+
+!**/user_1.png
