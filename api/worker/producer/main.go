@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/streadway/amqp"
 	"io/ioutil"
 	"log"
 	"os"
 	"time"
+
+	"github.com/streadway/amqp"
 )
 
 const url = "amqp://guest:guest@localhost:5672/"
@@ -31,14 +32,14 @@ func main() {
 
 	forever := make(chan bool)
 
-	files, err := ioutil.ReadDir("./producer/test-images/")
+	files, err := ioutil.ReadDir("images/uploaded")
 	if err != nil {
 		log.Fatalf("Failed to open dir. Error: %s", err.Error())
 	}
 
 	for _, f := range files {
 		// opening the image
-		file, err := os.Open("./producer/test-images/" + f.Name())
+		file, err := os.Open("images/uploaded/" + f.Name())
 		if err != nil {
 			log.Fatalf("Failed to open file. Error: %s", err.Error())
 		}
@@ -58,7 +59,7 @@ func main() {
 
 			// Publishing
 			ch.Publish("", q.Name, false, false, msg)
-			fmt.Printf("%s in QUEUE\n", filename)
+			fmt.Printf("%s queued...\n", filename)
 		}(img, f.Name())
 	}
 

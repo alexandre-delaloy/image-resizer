@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/nfnt/resize"
-	"github.com/streadway/amqp"
 	"image/png"
 	"io/ioutil"
 	"log"
@@ -11,11 +9,15 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/nfnt/resize"
+	"github.com/streadway/amqp"
 )
 
 const url = "amqp://guest:guest@localhost:5672/"
 
 func main() {
+
 	conn, err := amqp.Dial(url)
 	if err != nil {
 		log.Fatalf("Failed to connect to server. Error: %s", err.Error())
@@ -54,7 +56,7 @@ func main() {
 			s1 := rand.NewSource(time.Now().Unix())
 			r1 := rand.New(s1)
 			name := strconv.Itoa(r1.Intn(100000))
-			path := "./consumer/new-images/" + name + ".png"
+			path := "./images/resized/" + name + ".png"
 
 			err := ioutil.WriteFile(path, d.Body, 0644)
 			if err != nil {
