@@ -10,21 +10,12 @@ import (
 	"strconv"
 	"time"
 
-<<<<<<< HEAD:api/worker/consumer/main.go
 	"github.com/nfnt/resize"
 	"github.com/streadway/amqp"
-=======
-	"image/jpeg"
-	"image"
-	"strings"
->>>>>>> d8cac509a86a7e1a392924bbab5e8356922aa5b4:api/service-worker/consumer/main.go
 )
 
-const url = "amqp://guest:guest@localhost:5672/"
-
 func main() {
-
-	conn, err := amqp.Dial(url)
+	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
 		log.Fatalf("Failed to connect to server. Error: %s", err.Error())
 	}
@@ -57,8 +48,6 @@ func main() {
 	forever := make(chan bool)
 
 	go func() {
-		convertJpgToPng("flower.png")
-
 		for d := range msgs {
 			// create a random name for the new image
 			s1 := rand.NewSource(time.Now().Unix())
@@ -102,49 +91,4 @@ func main() {
 		}
 	}()
 	<-forever
-}
-
-func convertJpgToPng(file string) {
-	// extension check
-	filename := strings.Split(file, ".")
-	switch filename[1] {
-		case "jpeg":
-			fmt.Println("Jpeg file")
-		case "jpg":
-			fmt.Println("Jpg file")
-		default:
-			fmt.Println("Not supported or already png")
-			return
-	}
-	srcFileName := "./producer/test-images/" + file
-	dstFileName := "./producer/test-images/" + filename[0] + ".png"
-
-	// Decode the JPEG data. If reading from file, create a reader with
-	reader, err := os.Open(srcFileName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer reader.Close()
-	//Decode from reader to image format
-	m, formatString, err := image.Decode(reader)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	fmt.Println("Got format String", formatString)
-	fmt.Println(m.Bounds())
-
-	//Encode from image format to writer
-	f, err := os.OpenFile(dstFileName, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	err = jpeg.Encode(f, m, &jpeg.Options{Quality: 75})
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	fmt.Println("Png file", dstFileName, "created")
 }
