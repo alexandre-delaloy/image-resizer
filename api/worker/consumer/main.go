@@ -10,14 +10,12 @@ import (
 	"strconv"
 	"time"
 
-<<<<<<< HEAD:api/worker/consumer/main.go
+	"image"
+	"image/jpeg"
+	"strings"
+
 	"github.com/nfnt/resize"
 	"github.com/streadway/amqp"
-=======
-	"image/jpeg"
-	"image"
-	"strings"
->>>>>>> d8cac509a86a7e1a392924bbab5e8356922aa5b4:api/service-worker/consumer/main.go
 )
 
 const url = "amqp://guest:guest@localhost:5672/"
@@ -84,7 +82,7 @@ func main() {
 			file.Close()
 
 			// resizing
-			m := resize.Resize(500, 500, img, resize.Lanczos3)
+			m := resize.Resize(512, 512, img, resize.Lanczos3)
 
 			// create the file
 			out, err := os.Create(path)

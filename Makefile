@@ -23,19 +23,24 @@ logs: ## Display logs of your containers
 	docker-compose logs --follow
 
 lint-app:
-	cd app
-	npm run lint
+	cd app ; \
+	npm run lint ; \
 	cd -
 	
 lint-api:
-	cd api
-	gofmt -s -w -l .
+	cd api ; \
+	gofmt -s -w -l . ; \
 	cd -
-	
-init: ## Initialize the project with all required setup
-	make setup-env
-	make start
-	make logs
+
+start-producer:
+	cd api/worker ; \
+	go run producer/main.go ; \
+	cd -
+
+start-consumer:
+	cd api/worker ; \
+	go run consumer/main.go ; \
+	cd -
+
 
 .PHONY: help
-

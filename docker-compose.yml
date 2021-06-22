@@ -66,19 +66,6 @@ services:
       - ./api:/go/src/github.com/blyndusk/image-resizer/api
     networks:
       - image-resizer
-
-  # worker:
-  #   container_name: image-resizer_worker
-  #   build:
-  #     context: .
-  #     dockerfile: .docker/worker/dev.Dockerfile
-  #   volumes:
-  #     - ./worker:/go/src/github.com/blyndusk/image-resizer/worker
-  #   networks:
-  #     - image-resizer
-  #   depends_on: 
-  #     - rabbitmq
-  #   restart: on-failure
     
 volumes:
   postgres:
