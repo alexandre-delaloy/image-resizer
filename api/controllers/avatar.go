@@ -9,12 +9,6 @@ import (
 	"github.com/blyndusk/image-resizer/api/models"
 )
 
-func CreateAvatar(c *gin.Context) {
-	var input models.AvatarInput
-	middlewares.CreateAvatar(c, &input)
-	c.JSON(http.StatusOK, input)
-}
-
 func GetAllAvatars(c *gin.Context) {
 	var avatars models.Avatars
 	middlewares.GetAllAvatars(c, &avatars)
@@ -23,7 +17,7 @@ func GetAllAvatars(c *gin.Context) {
 
 func GetAvatarById(c *gin.Context) {
 	var avatar models.Avatar
-	middlewares.GetAvatarById(c, &avatar)
+	middlewares.GetAvatarByUserId(c, &avatar)
 	c.JSON(http.StatusOK, avatar)
 }
 
