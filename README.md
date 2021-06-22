@@ -8,29 +8,32 @@
 [![LICENSE](https://img.shields.io/github/license/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer/blob/main/LICENSE)
 [![REPO SIZE](https://img.shields.io/github/repo-size/blyndusk/image-resizer)](https://github.com/blyndusk/image-resizer)
 
-[![RELEASE](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml)
-[![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
 
-[![REACT](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml)
-[![GO](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml)
+
+
 
 - [image-resizer](#image-resizer)
   - [I - Intro](#i---intro)
     - [1 - Goal](#1---goal)
     - [2 - Stack](#2---stack)
-  - [II - Schemas](#ii---schemas)
+  - [III - Continuous integration](#iii---continuous-integration)
+    - [1 - On each push on every branch](#1---on-each-push-on-every-branch)
+    - [2 - On each push on `main` branch](#2---on-each-push-on-main-branch)
+    - [3 - Manually triggered](#3---manually-triggered)
+  - [III - Schemas](#iii---schemas)
     - [1 - Local infrastructure](#1---local-infrastructure)
     - [2 - Cloud infrastructure](#2---cloud-infrastructure)
     - [3 - Database schema](#3---database-schema)
-  - [III - Conventions, templates and guidelines](#iii---conventions-templates-and-guidelines)
+  - [IV - Conventions, templates and guidelines](#iv---conventions-templates-and-guidelines)
     - [A - Commit conventions](#a---commit-conventions)
     - [B - Issue template](#b---issue-template)
     - [C - Branch naming convention](#c---branch-naming-convention)
     - [D - Pull request template](#d---pull-request-template)
-  - [IV - Project use](#iv---project-use)
+  - [V - Project use](#v---project-use)
     - [Help](#help)
-    - [Init](#init)
+    - [Setup env](#setup-env)
     - [Start](#start)
+    - [Worker](#worker)
     - [Stop](#stop)
     - [Restart](#restart)
     - [Display logs](#display-logs)
@@ -52,7 +55,24 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 | PostgresQL | Object-relational database |
 | RabbitMQ   | Message broker             |
 
-## II - Schemas
+## III - Continuous integration
+
+### 1 - On each push on every branch 
+
+| FRONT | BACK |
+| --- | --- |
+| [![REACT](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/react.yml) | [![GO](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/go.yml) |
+
+### 2 - On each push on `main` branch
+
+[![DOCKER](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/docker.yml)
+
+### 3 - Manually triggered
+
+[![RELEASE](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml/badge.svg)](https://github.com/blyndusk/image-resizer/actions/workflows/release.yml)
+
+
+## III - Schemas
 
 ### 1 - Local infrastructure
 
@@ -66,7 +86,7 @@ Image Resizer is a school project made for @ecolehetic, with the aim to automate
 
 ![database-schema](./docs/database-schema.png)
 
-## III - Conventions, templates and guidelines
+## IV - Conventions, templates and guidelines
 
 ### A - Commit conventions
 
@@ -92,7 +112,7 @@ See [branch_naming_convention.md](.github/branch_naming_convention.md) for more 
 
 See [pull_request_template.md](.github/pull_request_template.md) for more informations.
 
-## IV - Project use
+## V - Project use
 
 ### Help
 
@@ -100,13 +120,13 @@ See [pull_request_template.md](.github/pull_request_template.md) for more inform
 $ make help
 ```
 
-### Init
+### Setup env
 
 ```bash
-$ make init
+$ make setup-env
 ```
 
-This command will copy env file. Please update `api/.env` with actual env vars
+This command will copy env file. Please update `api/.env` with actual default environment variables, the same from the `docker-compose.yaml`.
 
 ### Start
 
@@ -114,17 +134,38 @@ This command will copy env file. Please update `api/.env` with actual env vars
 $ make start
 ```
 
+This command will start the projet via `docker-compose.yaml`, with full reset.
+
+### Worker
+
+```bash
+$ make start-producer
+```
+
+This command will start the queue producer, which'll add the images to the queue
+
+```bash
+$ make start-consumer
+```
+
+This command will start the queue producer, which'll resize the images
+
+
 ### Stop
 
 ```bash
 $ make start
 ```
 
+This command will shutdown every container.
+
 ### Restart
 
 ```bash
 $ make restart
 ```
+
+Stop then start
 
 ### Display logs
 
@@ -136,8 +177,15 @@ $ make logs
 
 ```bash
 $ make lint-app
+```
+
+This command use `ESLint`.
+
+```bash
 $ make lint-api
 ```
+
+This command use `gofmt`.
 
 ## V - License
 
