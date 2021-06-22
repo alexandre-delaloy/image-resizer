@@ -2,3 +2,5 @@ api/tmp
 api/.env
 
 .idea/*
+
+**/*.png
