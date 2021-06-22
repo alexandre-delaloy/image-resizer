@@ -10,25 +10,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func CreateAvatar(c *gin.Context, input *models.AvatarInput) {
-	if err := c.ShouldBindJSON(&input); err != nil {
-		log.Error(err)
-		httpStatus, response := helpers.ErrorToJson(http.StatusBadRequest, err.Error())
-		c.JSON(httpStatus, response)
-		return
-	}
-
-	avatar := hydrateAvatar(input)
-	if err := database.Db.Create(&avatar).Error; err != nil {
-		log.Error(err)
-		httpStatus, response := helpers.GormErrorResponse(err)
-		c.JSON(httpStatus, response)
-		return
-	}
-}
-
 func GetAllAvatars(c *gin.Context, avatars *models.Avatars) {
-	if err := database.Db.Preload("Avatar").Find(&avatars).Error; err != nil {
+	if err := database.Db.Find(&avatars).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -36,8 +19,8 @@ func GetAllAvatars(c *gin.Context, avatars *models.Avatars) {
 	}
 }
 
-func GetAvatarById(c *gin.Context, avatar *models.Avatar) {
-	if err := database.Db.Preload("Avatar").Where("id = ?", c.Params.ByName("id")).First(&avatar).Error; err != nil {
+func GetAvatarByUserId(c *gin.Context, avatar *models.Avatar) {
+	if err := database.Db.Where("user_id = ?", c.Params.ByName("id")).First(&avatar).Error; err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.GormErrorResponse(err)
 		c.JSON(httpStatus, response)
@@ -46,7 +29,7 @@ func GetAvatarById(c *gin.Context, avatar *models.Avatar) {
 }
 
 func UpdateAvatar(c *gin.Context, avatar *models.Avatar, input *models.AvatarInput) {
-	GetAvatarById(c, avatar)
+	GetAvatarByUserId(c, avatar)
 	if err := c.ShouldBindJSON(&input); err != nil {
 		log.Error(err)
 		httpStatus, response := helpers.ErrorToJson(http.StatusBadRequest, err.Error())

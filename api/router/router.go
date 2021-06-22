@@ -24,12 +24,11 @@ func usersRoute(r *gin.Engine) {
 }
 
 func avatarsRoute(r *gin.Engine) {
-	r.POST("/avatars", controllers.CreateUser)
 
-	r.GET("/avatars", controllers.GetAllUsers)
-	r.GET("/avatars/:id", controllers.GetUserById)
+	r.GET("/avatars", controllers.GetAllAvatars)
+	r.GET("/users/:id/avatar", controllers.GetAvatarById)
 
-	r.PUT("/avatars/:id", controllers.UpdateUser)
+	r.PUT("/users/:id/avatar", controllers.UpdateAvatar)
 
-	r.DELETE("/avatars/:id", controllers.DeleteUser)
+	r.DELETE("/users/:id/avatar", controllers.DeleteAvatar)
 }
