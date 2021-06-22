@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 	"time"
-) 
+)
 
 const url = "amqp://guest:guest@localhost:5672/"
 

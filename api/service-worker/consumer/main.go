@@ -87,8 +87,8 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Printf("%s : OK\n",path)
-			time.Sleep(time.Second*5)
+			fmt.Printf("%s : OK\n", path)
+			time.Sleep(time.Second * 5)
 		}
 	}()
 	<-forever

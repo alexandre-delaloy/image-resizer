@@ -9,6 +9,7 @@ func Setup(r *gin.Engine) {
 	usersRoute(r)
 	avatarsRoute(r)
 	r.GET("/load_fixtures", controllers.LoadData)
+	r.POST("/upload", controllers.UploadFile)
 
 }
 
